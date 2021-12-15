@@ -14,21 +14,24 @@ namespace Breakfast
         static async Task Main(string[] args)
         {
             Coffee cup = PourCoffee();
-            Console.WriteLine("coffee is ready");
+            Console.WriteLine("Coffee is ready");
 
-            Egg eggs = await FryEggsAsync(2);
-            Console.WriteLine("eggs are ready");
+            Task<Egg> eggsTask = FryEggsAsync(2);
+            Egg eggs = await eggsTask;
+            Console.WriteLine("Eggs are ready");
 
-            Bacon bacon = await FryBaconAsync(3);
-            Console.WriteLine("bacon is ready");
+            Task<Bacon> baconTask = FryBaconAsync(3);
+            Bacon bacon = await baconTask;
+            Console.WriteLine("Bacon is ready");
 
-            Toast toast = await ToastBreadAsync(2);
+            Task<Toast> toastTask = ToastBreadAsync(2);
+            Toast toast = await toastTask;
             ApplyButter(toast);
             ApplyJam(toast);
-            Console.WriteLine("toast is ready");
+            Console.WriteLine("Toast is ready");
 
             Juice oj = PourOJ();
-            Console.WriteLine("orange juice is ready");
+            Console.WriteLine("Oj is ready");
             Console.WriteLine("Breakfast is ready!");
         }
 
