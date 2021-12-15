@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Breakfast.Ingredients;
+﻿using Breakfast.Ingredients;
 
 namespace Breakfast
 {
