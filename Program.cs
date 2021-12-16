@@ -4,12 +4,7 @@ namespace Breakfast
 {
     class Program
     {
-        // 1. Gießen Sie eine Tasse Kaffee ein.
-        // 2. Erhitzen Sie eine Pfanne und braten Sie zwei Eier.
-        // 3. Braten Sie drei Scheiben Speck.
-        // 4. Toaste zwei Stücke Brot.
-        // 5. Butter und Marmelade auf den Toast geben.
-        // 6. Gießen Sie ein Glas Orangensaft ein.
+        // Wenn Sie Erfahrung mit dem Kochen haben, würden Sie diese Anweisungen asynchron ausführen. Sie würden erst die Pfanne für die Eier vorwärmen und dann den Speck zubereiten. Sie würden das Brot in den Toaster stecken und dann mit den Eiern beginnen. Bei jedem Schritt des Prozesses würden Sie eine Aufgabe beginnen und sich dann den Aufgaben zuwenden, die Ihre Aufmerksamkeit erfordern.
 
         static async Task Main(string[] args)
         {
@@ -20,6 +15,15 @@ namespace Breakfast
             var baconTask = FryBaconAsync(3);
             var toastTask = MakeToastWithButterAndJamAsync(2);
 
+            await ProcessTaskResultsInOrderTheyAreCompleted(eggsTask, baconTask, toastTask);
+
+            Juice oj = PourOJ();
+            Console.WriteLine("oj is ready");
+            Console.WriteLine("Breakfast is ready!");
+        }
+
+        private static async Task ProcessTaskResultsInOrderTheyAreCompleted(Task<Egg> eggsTask, Task<Bacon> baconTask, Task toastTask)
+        {
             var breakfastTasks = new List<Task> { eggsTask, baconTask, toastTask };
             while (breakfastTasks.Count > 0)
             {
@@ -38,10 +42,6 @@ namespace Breakfast
                 }
                 breakfastTasks.Remove(finishedTask);
             }
-
-            Juice oj = PourOJ();
-            Console.WriteLine("oj is ready");
-            Console.WriteLine("Breakfast is ready!");
         }
 
         private static async Task MakeToastWithButterAndJamAsync(int slices)
