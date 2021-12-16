@@ -20,17 +20,14 @@ namespace Breakfast
             Task<Bacon> baconTask = FryBaconAsync(3);
             Task toastTask = MakeToastWithButterAndJamAsync(2);
 
-            Egg eggs = await eggsTask;
-            Console.WriteLine("Eggs are ready");
-            
-            Bacon bacon = await baconTask;
-            Console.WriteLine("Bacon is ready");
-            
-            await toastTask;
-            Console.WriteLine("Toast is ready");
-
             Juice oj = PourOJ();
             Console.WriteLine("Oj is ready");
+
+            await Task.WhenAll(eggsTask, baconTask, toastTask);
+            Console.WriteLine("Eggs are ready");
+            Console.WriteLine("Bacon is ready");
+            Console.WriteLine("Toast is ready");
+
             Console.WriteLine("Breakfast is ready!");
         }
 
