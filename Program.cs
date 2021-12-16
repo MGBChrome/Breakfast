@@ -61,8 +61,8 @@ namespace Breakfast
             }
             Console.WriteLine("Toast: Start toasting...");
             await Task.Delay(2000);
-            Console.WriteLine("Toast: Fire! Toast is ruined!");
-            throw new InvalidOperationException("Toast: The toaster is on fire");
+            // Console.WriteLine("Toast: Fire! Toast is ruined!");
+            // throw new InvalidOperationException("Toast: The toaster is on fire");
             await Task.Delay(1000);
             Console.WriteLine("Toast: Remove toast from toaster");
 
