@@ -14,20 +14,33 @@ namespace Breakfast
         static async Task Main(string[] args)
         {
             Coffee cup = PourCoffee();
-            Console.WriteLine("Coffee is ready");
+            Console.WriteLine("coffee is ready");
 
-            Task<Egg> eggsTask = FryEggsAsync(2);
-            Task<Bacon> baconTask = FryBaconAsync(3);
-            Task toastTask = MakeToastWithButterAndJamAsync(2);
+            var eggsTask = FryEggsAsync(2);
+            var baconTask = FryBaconAsync(3);
+            var toastTask = MakeToastWithButterAndJamAsync(2);
+
+            var breakfastTasks = new List<Task> { eggsTask, baconTask, toastTask };
+            while (breakfastTasks.Count > 0)
+            {
+                Task finishedTask = await Task.WhenAny(breakfastTasks);
+                if (finishedTask == eggsTask)
+                {
+                    Console.WriteLine("eggs are ready");
+                }
+                else if (finishedTask == baconTask)
+                {
+                    Console.WriteLine("bacon is ready");
+                }
+                else if (finishedTask == toastTask)
+                {
+                    Console.WriteLine("toast is ready");
+                }
+                breakfastTasks.Remove(finishedTask);
+            }
 
             Juice oj = PourOJ();
-            Console.WriteLine("Oj is ready");
-
-            await Task.WhenAll(eggsTask, baconTask, toastTask);
-            Console.WriteLine("Eggs are ready");
-            Console.WriteLine("Bacon is ready");
-            Console.WriteLine("Toast is ready");
-
+            Console.WriteLine("oj is ready");
             Console.WriteLine("Breakfast is ready!");
         }
 
