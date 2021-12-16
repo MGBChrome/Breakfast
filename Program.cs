@@ -60,7 +60,10 @@ namespace Breakfast
                 Console.WriteLine("Toast: Putting a slice of bread in the toaster");
             }
             Console.WriteLine("Toast: Start toasting...");
-            await Task.Delay(3000);
+            await Task.Delay(2000);
+            Console.WriteLine("Toast: Fire! Toast is ruined!");
+            throw new InvalidOperationException("Toast: The toaster is on fire");
+            await Task.Delay(1000);
             Console.WriteLine("Toast: Remove toast from toaster");
 
             return new Toast();
