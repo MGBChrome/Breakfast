@@ -1,4 +1,5 @@
-﻿using Breakfast.Ingredients;
+﻿using System.Diagnostics;
+using Breakfast.Ingredients;
 
 namespace Breakfast
 {
@@ -13,6 +14,8 @@ namespace Breakfast
 
         static void Main(string[] args)
         {
+            var stopwatch = Stopwatch.StartNew();
+
             Coffee cup = PourCoffee();
             Console.WriteLine("coffee is ready");
 
@@ -30,6 +33,10 @@ namespace Breakfast
             Juice oj = PourOJ();
             Console.WriteLine("oj is ready");
             Console.WriteLine("Breakfast is ready!");
+
+            stopwatch.Stop();
+            var takenMilliseconds = stopwatch.ElapsedMilliseconds;
+            Console.WriteLine($"{Environment.NewLine}Taken milliseconds: {takenMilliseconds}");
         }
 
         private static Juice PourOJ()
@@ -51,7 +58,7 @@ namespace Breakfast
                 Console.WriteLine("Putting a slice of bread in the toaster");
             }
             Console.WriteLine("Start toasting...");
-            Task.Delay(3000).Wait();
+            Task.Delay(6000).Wait();
             Console.WriteLine("Remove toast from toaster");
 
             return new Toast();
@@ -61,13 +68,13 @@ namespace Breakfast
         {
             Console.WriteLine($"putting {slices} slices of bacon in the pan");
             Console.WriteLine("cooking first side of bacon...");
-            Task.Delay(3000).Wait();
+            Task.Delay(6000).Wait();
             for (int slice = 0; slice < slices; slice++)
             {
                 Console.WriteLine("flipping a slice of bacon");
             }
             Console.WriteLine("cooking the second side of bacon...");
-            Task.Delay(3000).Wait();
+            Task.Delay(6000).Wait();
             Console.WriteLine("Put bacon on plate");
 
             return new Bacon();
@@ -76,10 +83,10 @@ namespace Breakfast
         private static Egg FryEggs(int howMany)
         {
             Console.WriteLine("Warming the egg pan...");
-            Task.Delay(3000).Wait();
+            Task.Delay(6000).Wait();
             Console.WriteLine($"cracking {howMany} eggs");
             Console.WriteLine("cooking the eggs ...");
-            Task.Delay(3000).Wait();
+            Task.Delay(6000).Wait();
             Console.WriteLine("Put eggs on plate");
 
             return new Egg();
